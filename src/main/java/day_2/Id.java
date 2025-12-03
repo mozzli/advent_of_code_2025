@@ -15,15 +15,6 @@ public class Id {
         intList = getIdList();
     }
 
-    private ArrayList<Long> getIdList() {
-        return LongStream.rangeClosed(beginningId, endingId).boxed().collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public ArrayList<Long> getInvalidIds() {
-        return intList.stream().filter(x -> String.valueOf(x).length() % 2 == 0 && String.valueOf(x).substring(0, String.valueOf(x).length() / 2)
-                .equals(String.valueOf(x).substring(String.valueOf(x).length() / 2))).collect(Collectors.toCollection(ArrayList::new));
-    }
-
     public Long getInvalidIdsSum() {
         return getInvalidIds().stream().mapToLong(Long::longValue).sum();
     }
@@ -32,7 +23,16 @@ public class Id {
         return getInvalidIdsPro().stream().mapToLong(Long::longValue).sum();
     }
 
-    public ArrayList<Long> getInvalidIdsPro() {
+    private ArrayList<Long> getIdList() {
+        return LongStream.rangeClosed(beginningId, endingId).boxed().collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private ArrayList<Long> getInvalidIds() {
+        return intList.stream().filter(x -> String.valueOf(x).length() % 2 == 0 && String.valueOf(x).substring(0, String.valueOf(x).length() / 2)
+                .equals(String.valueOf(x).substring(String.valueOf(x).length() / 2))).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private ArrayList<Long> getInvalidIdsPro() {
         return intList.stream().filter(x -> checkForInvalidIdPro(String.valueOf(x))).collect(Collectors.toCollection(ArrayList::new));
     }
 
