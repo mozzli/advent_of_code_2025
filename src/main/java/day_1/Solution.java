@@ -3,7 +3,7 @@ package day_1;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Solution {
+class Solution {
 
     public Solution(ArrayList<String> input){
         System.out.println("The password: " + countZeros(input));
